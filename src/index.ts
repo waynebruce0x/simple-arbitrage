@@ -51,17 +51,22 @@ async function main() {
     arbitrageSigningWallet,
     flashbotsProvider,
     new Contract(BUNDLE_EXECUTOR_ADDRESS, BUNDLE_EXECUTOR_ABI, provider) )
-
+  console.log('enter getMarketsByToken');
   const markets = await UniswappyV2EthPair.getUniswapMarketsByToken(provider, FACTORY_ADDRESSES);
+  console.log('exit getMarketsByToken');
   provider.on('block', async (blockNumber) => {
+    console.log('enter updateReserves');
     await UniswappyV2EthPair.updateReserves(provider, markets.allMarketPairs);
+    console.log('exit updateReserves');
     const bestCrossedMarkets = await arbitrage.evaluateMarkets(markets.marketsByToken);
     if (bestCrossedMarkets.length === 0) {
       console.log("No crossed markets")
       return
     }
     bestCrossedMarkets.forEach(Arbitrage.printCrossedMarket);
+    console.log('enter arb');
     arbitrage.takeCrossedMarkets(bestCrossedMarkets, blockNumber, MINER_REWARD_PERCENTAGE).then(healthcheck).catch(console.error)
+    console.log('exit arb');
   })
 }
 
