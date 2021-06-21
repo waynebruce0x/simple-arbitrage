@@ -133,7 +133,7 @@ export class Arbitrage {
 
       const targets: Array<string> = [...buyCalls.targets, bestCrossedMarket.sellToMarket.marketAddress]
       const payloads: Array<string> = [...buyCalls.data, sellCallData]
-      console.log({targets, payloads})
+      //console.log({targets, payloads})
       const minerReward = bestCrossedMarket.profit.mul(minerRewardPercentage).div(100);
       const transaction = await this.bundleExecutorContract.populateTransaction.uniswapWeth(bestCrossedMarket.volume, minerReward, targets, payloads, {
         gasPrice: BigNumber.from(0),
@@ -161,7 +161,9 @@ export class Arbitrage {
           transaction: transaction
         }
       ];
+      console.log('CCCCC');
       console.log(bundledTransactions)
+      console.log('CCCCC');
       const signedBundle = await this.flashbotsProvider.signBundle(bundledTransactions)
       //
       const simulation = await this.flashbotsProvider.simulate(signedBundle, blockNumber + 1 )
