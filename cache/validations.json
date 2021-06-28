@@ -1,0 +1,166 @@
+{
+  "version": "3.2",
+  "log": [
+    {
+      "FlashBotsMultiCall": {
+        "src": "contracts/BundleExecutor.sol:29",
+        "version": {
+          "withMetadata": "951d699b467c0322100b6005301d7c59a64ef99af92c9cc020e2f6e5813ce853",
+          "withoutMetadata": "fa4ab4a5f585da7da6e8c98bdef3b1ef0304df1a4410df836505456d681339dc",
+          "linkedWithoutMetadata": "fa4ab4a5f585da7da6e8c98bdef3b1ef0304df1a4410df836505456d681339dc"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "()",
+          "uniswapWeth(uint256,uint256,address[],bytes[])",
+          "call(address payable,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FlashBotsMultiCall",
+            "src": "contracts/BundleExecutor.sol:44"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "owner",
+            "src": "contracts/BundleExecutor.sol:30"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "executor",
+            "src": "contracts/BundleExecutor.sol:31"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC20": {
+        "src": "contracts/BundleExecutor.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IWETH": {
+        "src": "contracts/BundleExecutor.sol:22",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "deposit()",
+          "withdraw(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "FlashBotsUniswapQuery": {
+        "src": "contracts/UniswapFlashQuery.sol:19",
+        "version": {
+          "withMetadata": "27981372504c674c44776c424f995818def4f80c559c8c406164032bf6b37be5",
+          "withoutMetadata": "b97ddd28d57bc87bff95e47330a04bd048d2d8732532aea7542c6ec89a4dc84c",
+          "linkedWithoutMetadata": "b97ddd28d57bc87bff95e47330a04bd048d2d8732532aea7542c6ec89a4dc84c"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getReservesByPairs(contract IUniswapV2Pair[])",
+          "getPairsByIndexRange(address,uint256,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IUniswapV2Pair": {
+        "src": "contracts/UniswapFlashQuery.sol:6",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "token0()",
+          "token1()",
+          "getReserves()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "UniswapV2Factory": {
+        "src": "contracts/UniswapFlashQuery.sol:12",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "allPairsLength()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "UniswapV2Factory",
+              "label": "getPair",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_address))",
+              "src": "contracts/UniswapFlashQuery.sol:13"
+            },
+            {
+              "contract": "UniswapV2Factory",
+              "label": "allPairs",
+              "type": "t_array(t_address)dyn_storage",
+              "src": "contracts/UniswapFlashQuery.sol:14"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_mapping(t_address,t_address))": {
+              "label": "mapping(address => mapping(address => address))"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_mapping(t_address,t_address)": {
+              "label": "mapping(address => address)"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      }
+    }
+  ]
+}

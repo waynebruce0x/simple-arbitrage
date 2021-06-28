@@ -139,7 +139,11 @@ export class Arbitrage {
         gasPrice: BigNumber.from(0),
         gasLimit: BigNumber.from(1000000),
       });
-
+      const EG = await this.bundleExecutorContract.provider.estimateGas(
+        {
+          ...transaction,
+          from: this.executorWallet.address
+        });
       try {
         const estimateGas = await this.bundleExecutorContract.provider.estimateGas(
           {
@@ -161,9 +165,7 @@ export class Arbitrage {
           transaction: transaction
         }
       ];
-      console.log('CCCCC');
       console.log(bundledTransactions)
-      console.log('CCCCC');
       const signedBundle = await this.flashbotsProvider.signBundle(bundledTransactions)
       //
       const simulation = await this.flashbotsProvider.simulate(signedBundle, blockNumber + 1 )

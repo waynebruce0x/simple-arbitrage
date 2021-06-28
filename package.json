@@ -1,7 +1,7 @@
 {
   "name": "@flashbots/simple-arbitrage",
   "version": "0.0.1",
-  "description": "simple-arbitrage ================ This repository contains a simple, mechanical system for discovering, evaluating, rating, and submitting arbitrage opportunities to the Flashbots bundle endpoint. This script is very unlikely to be profitable, as many users have access to it, and it is targeting well-known Ethereum opportunities.",
+  "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -23,8 +23,8 @@
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "eslint": "^7.15.0",
-    "ethers": "^5.3.1",
-    "hardhat": "^2.4.0",
+    "ethers": "^5.4.0",
+    "hardhat": "^2.4.1",
     "jasmine": "^3.6.3",
     "nyc": "^15.1.0"
   },
@@ -32,21 +32,9 @@
     "ethers": "^5.0.23"
   },
   "dependencies": {
-    "@flashbots/ethers-provider-bundle": "^0.3.1",
+    "@flashbots/ethers-provider-bundle": "^0.3.2",
     "lodash": "^4.17.21",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.3.4"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/waynebruce0x/simple-arbitrage.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/waynebruce0x/simple-arbitrage/issues"
-  },
-  "homepage": "https://github.com/waynebruce0x/simple-arbitrage#readme"
+    "ts-node": "^9.1.0",
+    "typescript": "^4.1.2"
+  }
 }

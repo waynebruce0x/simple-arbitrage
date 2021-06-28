@@ -32,6 +32,7 @@ if (FLASHBOTS_RELAY_SIGNING_KEY === "") {
 const HEALTHCHECK_URL = process.env.HEALTHCHECK_URL || ""
 
 const provider = new providers.StaticJsonRpcProvider(ETHEREUM_RPC_URL);
+//const provider = providers.getDefaultProvider('goerli');
 
 const arbitrageSigningWallet = new Wallet(PRIVATE_KEY);
 const flashbotsRelaySigningWallet = new Wallet(FLASHBOTS_RELAY_SIGNING_KEY);
@@ -40,33 +41,28 @@ function healthcheck() {
   if (HEALTHCHECK_URL === "") {
     return
   }
-  get(HEALTHCHECK_URL).on('error', console.error);
+  get(HEALTHCHECK_URL);//.on('error', console.error);
 }
 
 async function main() {
   console.log("Searcher Wallet Address: " + await arbitrageSigningWallet.getAddress())
   console.log("Flashbots Relay Signing Wallet Address: " + await flashbotsRelaySigningWallet.getAddress())
-  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, flashbotsRelaySigningWallet);
+  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, flashbotsRelaySigningWallet,'https://relay-goerli.flashbots.net/','goerli');
   const arbitrage = new Arbitrage(
     arbitrageSigningWallet,
     flashbotsProvider,
     new Contract(BUNDLE_EXECUTOR_ADDRESS, BUNDLE_EXECUTOR_ABI, provider) )
-  console.log('enter getMarketsByToken');
+
   const markets = await UniswappyV2EthPair.getUniswapMarketsByToken(provider, FACTORY_ADDRESSES);
-  console.log('exit getMarketsByToken');
   provider.on('block', async (blockNumber) => {
-    console.log('enter updateReserves');
     await UniswappyV2EthPair.updateReserves(provider, markets.allMarketPairs);
-    console.log('exit updateReserves');
     const bestCrossedMarkets = await arbitrage.evaluateMarkets(markets.marketsByToken);
     if (bestCrossedMarkets.length === 0) {
       console.log("No crossed markets")
       return
     }
     bestCrossedMarkets.forEach(Arbitrage.printCrossedMarket);
-    console.log('enter arb');
-    arbitrage.takeCrossedMarkets(bestCrossedMarkets, blockNumber, MINER_REWARD_PERCENTAGE).then(healthcheck).catch(console.error)
-    console.log('exit arb');
+    arbitrage.takeCrossedMarkets(bestCrossedMarkets, blockNumber, MINER_REWARD_PERCENTAGE).then(healthcheck)//.catch(console.error)
   })
 }
 
